@@ -50,5 +50,25 @@ export const INITIAL_RESOURCES: Resource[] = [
     tags: ['indexing', 'b-tree', 'performance'],
     downloads: 12,
     content: "Indexes are used to quickly locate data without having to search every row in a database table. B-Trees and Hash Indexes are common types. Clustered vs Non-clustered indexes.",
+  },
+  {
+    id: 'res-5',
+    title: 'ER Diagram Structure',
+    type: 'Image',
+    topic: 'ER Model and Relational Model',
+    dateStr: '2025-02-12',
+    tags: ['diagram', 'er-model', 'image'],
+    downloads: 34,
+    content: "Visual diagram of Entity Relationship model components: Entities (Rectangles), Attributes (Ovals), Relationships (Diamonds).",
+  },
+  {
+    id: 'res-6',
+    title: 'Lecture Recording: SQL Joins',
+    type: 'Video',
+    topic: 'SQL Basics',
+    dateStr: '2025-02-19',
+    tags: ['recording', 'video', 'joins'],
+    downloads: 56,
+    content: "Video recording of the lecture covering Inner Join, Left Join, Right Join, and Full Outer Join examples.",
   }
 ];

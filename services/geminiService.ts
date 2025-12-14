@@ -40,24 +40,31 @@ export const processStudentQuery = async (
     const today = new Date().toISOString().split('T')[0];
     
     const prompt = `
-      You are 'The Smart Librarian', an AI assistant for university students.
+      You are 'The Smart Librarian', an automated distribution system for university students.
       
       Current Date: ${today}
       
       Class Schedule (to map dates like 'last Tuesday' to topics):
       ${JSON.stringify(schedule)}
       
-      Available Resources (Database):
+      Available Resources (Cloud Repository):
       ${JSON.stringify(resources.map(r => ({ id: r.id, title: r.title, type: r.type, tags: r.tags, topic: r.topic, date: r.dateStr })))}
       
       User Query: "${query}"
       
       Instructions:
-      1. Analyze the user's query to understand what topic or date they are referring to.
-      2. Match this to the most relevant resource in the Available Resources list.
-      3. Determine if they want the file (e.g., "send me", "give me the pdf") or a summary (e.g., "explain", "summarize", "cheat sheet").
-      4. If the query implies a date (e.g., "lecture from last week"), use the Schedule to find the topic, then find the resource.
-      5. Return a JSON object matching the schema.
+      1. AUTOMATIC DISTRIBUTION: Your primary goal is to find and deliver the file the student needs immediately.
+      2. Analyze the user's query to understand what topic, date, or specific file type they are referring to.
+      3. Match this to the most relevant resource in the Available Resources list.
+      4. Handling Requests:
+         - "Send notes", "Send assignment", "give me the pdf" -> INTENT: "download".
+         - "Unit 2 content", "materials for unit 1" -> INTENT: "download".
+         - "Explain", "Summarize", "What is..." -> INTENT: "summary".
+      5. Media Type Priorities:
+         - "diagram", "picture", "photo" -> Prioritize 'Image'.
+         - "recording", "lecture", "video" -> Prioritize 'Video' or 'Recording'.
+      6. If the query implies a date (e.g., "lecture from last week"), use the Schedule to find the topic, then find the resource.
+      7. Return a JSON object matching the schema. The 'message' should be short and confirm the action (e.g., "Here are the notes you requested.").
     `;
 
     const response = await ai.models.generateContent({

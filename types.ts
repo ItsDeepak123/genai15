@@ -1,12 +1,13 @@
 export interface Resource {
   id: string;
   title: string;
-  type: 'PDF' | 'PPT' | 'Recording' | 'Assignment';
+  type: 'PDF' | 'PPT' | 'Recording' | 'Assignment' | 'Image' | 'Video';
   topic: string;
   dateStr: string; // ISO Date YYYY-MM-DD
   tags: string[];
   content: string; // Simulated content for summarization
   downloads: number;
+  url?: string; // Direct link to the resource
 }
 
 export interface ScheduleItem {
@@ -23,12 +24,22 @@ export interface Message {
   timestamp: number;
 }
 
-export interface QueryLog {
+export interface ActivityLog {
+  id: string;
+  resourceTitle: string;
   topic: string;
+  query: string;
   timestamp: number;
 }
 
 export enum UserRole {
   STUDENT = 'STUDENT',
   TEACHER = 'TEACHER',
+}
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: UserRole;
 }
